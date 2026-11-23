@@ -1,0 +1,10 @@
+[package]
+name = "rh-audit"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "SQV independent validation harness for the Riemann Hypothesis Lean formalization"
+
+[[bin]]
+name = "rh-audit"
+path = "src/main.rs"

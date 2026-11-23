@@ -1,0 +1,6 @@
+/target/
+/upstream/*
+!/upstream/.gitkeep
+*.olean
+*.ilean
+.DS_Store

@@ -1,0 +1,11 @@
+{
+  "id": "RH26-CLAIM-00001",
+  "kind": "objection",
+  "status": "open",
+  "claim": "Waterloo Part III does not prove (M); treating the PDF as a complete RH proof overstates the exposition.",
+  "source": "papers/zeta-paper.pdf abstract + Part III table",
+  "lean_declaration": null,
+  "dependencies": ["RH26-V4-PAPER"],
+  "evidence": ["specs/paper_bridge/paper-lean-map.md"],
+  "uair_receipt": null
+}

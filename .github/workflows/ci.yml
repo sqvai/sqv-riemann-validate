@@ -1,0 +1,27 @@
+name: validator-ci
+on:
+  push:
+  pull_request:
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test
+      - run: cargo build --release
+  paper-pin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify pinned Waterloo paper hash
+        run: |
+          expected=$(grep '^PAPER_SHA256=' config/upstream.env | cut -d= -f2)
+          actual=$(sha256sum papers/zeta-paper.pdf | awk '{print $1}')
+          echo "expected=$expected"
+          echo "actual=$actual"
+          test "$expected" = "$actual"

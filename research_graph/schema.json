@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sqv.ai/schemas/math-research-node-v1.json",
+  "title": "SQV Mathematical Research Node",
+  "type": "object",
+  "required": ["id", "kind", "status", "claim"],
+  "properties": {
+    "id": {"type": "string"},
+    "kind": {"enum": ["definition", "theorem", "lemma", "conjecture", "proof_attempt", "objection", "counterexample", "formalization", "classical_experiment", "quantum_experiment"]},
+    "status": {"enum": ["proposed", "open", "numerical_evidence", "formal_partial", "formal_complete", "independently_checked", "refuted", "inconclusive"]},
+    "claim": {"type": "string"},
+    "source": {"type": "string"},
+    "lean_declaration": {"type": ["string", "null"]},
+    "dependencies": {"type": "array", "items": {"type": "string"}},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "uair_receipt": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
