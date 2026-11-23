@@ -4,3 +4,13 @@
 *.olean
 *.ilean
 .DS_Store
+.uair-forge/
+evidence/*/
+!evidence/.gitkeep
+receipts/*.json
+!receipts/.gitkeep
+missions/rh26-validate/.nodes/
+missions/rh26-validate/skynet-agent-progress.txt
+missions/rh26-validate/claude-progress.txt
+
+missions/rh26-validate/wave.log

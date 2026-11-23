@@ -1,0 +1,39 @@
+schema: harness_package/v1
+surface: opencode
+name: sqv-riemann-validate
+version: 0.1.0
+profile:
+  security:
+    mode: enforce
+    airgap: runtime
+    agent_guard: coding
+    h5_live: true
+    sandbox: uaf-k8s
+    egress_deny_hosts:
+    - rubric.local
+    - answers.benchmark
+    - grading.internal
+    scrub_experience: true
+    detect_bypass: true
+    verify_plugins: true
+  performance:
+    require_perf_receipt: true
+    optimizer_profile: auto
+  efficiency:
+    max_usd: 5.0
+    max_tokens: 500000
+    max_steps: 80
+    dedupe_probes: true
+    experience_top_k: 3
+    early_stop: true
+  results:
+    held_out: true
+    min_seeds: 3
+    domain_scorer: auto
+    compose_hitl: high_risk_only
+always_on:
+- systemprompt.md
+- guardrails.md
+- LongTermMEMORY.md
+- tool_descriptions/tool_guidance.md
+notes: Skynet Harness++ recursive package (Harness²-inspired c1–c8)

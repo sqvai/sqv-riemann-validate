@@ -28,6 +28,19 @@ Announcement: https://alpo.ge/remark.pdf
 - UAIR-style JSON receipts with SHA-256-bound logs;
 - research-node JSON schema for MathIR/ProofIR/ResearchGraph ingestion.
 
+## Hyperagents2 / Harness++
+
+Long-running validation is driven by UAIR-Forge Hyperagents2:
+
+```bash
+export UAIR_FORGE_WORKSPACE=$PWD
+make hyperagents-status
+make wave          # next unfinished gate + counted-receipt harness-run
+make graph-run     # multi-wave Harness++ loop (promotion=hold)
+```
+
+See `docs/HYPERAGENTS2.md`, mission `missions/rh26-validate/`, package `harness/rh26/`.
+
 ## Bootstrap
 
 Requirements for V0/V1:

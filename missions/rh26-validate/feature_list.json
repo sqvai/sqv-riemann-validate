@@ -1,0 +1,77 @@
+{
+  "schema": "skynet_long_running_feature_list/v1",
+  "features": [
+    {
+      "id": "rh26-preflight",
+      "category": "functional",
+      "description": "Tooling + Waterloo paper pin preflight passes",
+      "passes": true,
+      "steps": [
+        "./scripts/preflight.sh",
+        "Confirm PAPER_SHA256 matches papers/zeta-paper.pdf"
+      ]
+    },
+    {
+      "id": "rh26-v4-paper",
+      "category": "functional",
+      "description": "V4 paper\u2194Lean structural alignment (Waterloo zeta-paper)",
+      "passes": true,
+      "steps": [
+        "make v4",
+        "Receipt RH26-V4-PAPER.json status PASS"
+      ]
+    },
+    {
+      "id": "rh26-v0-repro",
+      "category": "functional",
+      "description": "V0 reproducible lake build Main on pinned upstream SHA",
+      "passes": false,
+      "steps": [
+        "make bootstrap",
+        "make v0",
+        "Receipts RH26-V0-CACHE and RH26-V0-BUILD PASS"
+      ]
+    },
+    {
+      "id": "rh26-v1-axioms",
+      "category": "functional",
+      "description": "V1 escape-hatch scan + five-theorem axiom audit",
+      "passes": false,
+      "steps": [
+        "make v1",
+        "Only propext, Classical.choice, Quot.sound"
+      ]
+    },
+    {
+      "id": "rh26-v2-comparator",
+      "category": "functional",
+      "description": "V2 Comparator/nanoda independent checker",
+      "passes": false,
+      "steps": [
+        "make v2",
+        "Challenge.lean overlay vs Main"
+      ]
+    },
+    {
+      "id": "rh26-v3-clay",
+      "category": "functional",
+      "description": "V3 Clay RH semantic bridge compiles and implies ClayRiemannHypothesis",
+      "passes": false,
+      "steps": [
+        "make v3",
+        "Receipt RH26-V3-CLAY-BRIDGE PASS"
+      ]
+    },
+    {
+      "id": "rh26-hyperagents2-receipts",
+      "category": "functional",
+      "description": "Hyperagents2 harness-run wiring live; record each gate PASS with counted-v2 receipt",
+      "passes": false,
+      "steps": [
+        "write-counted-receipt.sh + record-pass.sh",
+        "RH26-V4-PAPER eval_outcome recorded",
+        "Remaining gates record on PASS"
+      ]
+    }
+  ]
+}
