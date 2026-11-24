@@ -7,6 +7,20 @@ export PATH="$HOME/.elan/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 cd "$ROOT"
 UF="${UAIR_FORGE:-$HOME/.local/bin/uair-forge}"
 PROGRESS="$ROOT/missions/rh26-validate/skynet-agent-progress.txt"
+LOCK="$ROOT/missions/rh26-validate/.wave.lock"
+
+# Prevent concurrent make wave + make graph-run (disk/Lean corruption risk).
+exec 9>"$LOCK"
+if ! flock -n 9; then
+  echo "[wave] another wave/graph-run holds $LOCK — abort" >&2
+  exit 75
+fi
+
+avail_kb="$(df -Pk / | awk 'NR==2{print $4}')"
+if [[ "${avail_kb:-0}" -lt 10485760 ]]; then
+  echo "[wave] need >=10GiB free on / (have ${avail_kb} KiB) before Lean gates" >&2
+  exit 76
+fi
 
 GATE="$(./missions/rh26-validate/scripts/next-gate.sh)"
 echo "[wave] next=$GATE" | tee -a "$PROGRESS"

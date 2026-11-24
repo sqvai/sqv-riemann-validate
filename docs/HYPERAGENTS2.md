@@ -29,6 +29,7 @@ uair-forge self-improve hyperagents2 long-running-mission-check --dir ./missions
 ./missions/rh26-validate/scripts/wave.sh
 
 # Graph-backed multi-wave (Harness++ hook)
+# Do NOT run `make wave` and `make graph-run` at the same time.
 uair-forge self-improve hyperagents2 graph-run \
   --seed RH26-V0 \
   --max-waves 5 \
@@ -37,6 +38,12 @@ uair-forge self-improve hyperagents2 graph-run \
   --work-cmd './missions/rh26-validate/scripts/wave.sh' \
   --advance-cmd './missions/rh26-validate/scripts/next-gate.sh'
 ```
+
+## Disk / concurrency
+
+- `wave.sh` takes `missions/rh26-validate/.wave.lock` (flock) and refuses to start if `/` has &lt;10 GiB free.
+- Full `lake build Main` needs far more than 10 GiB (`.lake` alone can exceed that); free space before V0-BUILD.
+- Prefer **either** `make wave` **or** `make graph-run`, never both.
 
 ## Gate order
 
